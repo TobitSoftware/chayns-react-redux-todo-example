@@ -32,7 +32,11 @@ class AddTodo extends PureComponent {
         const { newTodo } = this.state;
 
         if (newTodo.get('todo').length > 0) {
-            addTodo(newTodo.set('id', Math.random()));
+            addTodo(
+                newTodo
+                    .set('id', Math.random())
+                    .set('creationTime', Date.now())
+            );
         }
 
         this.setState({
