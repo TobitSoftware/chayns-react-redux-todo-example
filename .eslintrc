@@ -15,8 +15,8 @@
   "rules": {
     "function-paren-newline": ["error", "multiline"],
     "comma-dangle": ["error", "always-multiline"],
-    "linebreak-style": ["error", "before"],
     "arrow-parens": ["error", "always"],
+    "linebreak-style": "off",
     "no-plusplus": "off",
     "max-len": "off",
     "indent": "off",
