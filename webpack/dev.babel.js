@@ -1,10 +1,12 @@
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import webpack from 'webpack';
 import path from 'path';
 import fs from 'fs';
-import webpack from 'webpack';
-import HtmlWebpackPlugin from 'html-webpack-plugin';
-import getBaseConfig from './base-config';
+
+import baseConfig from './base-config';
 
 const ROOT_PATH = path.resolve('./');
+
 const ssl = {};
 
 try {
@@ -16,15 +18,15 @@ try {
 }
 
 export default {
-    ...getBaseConfig(true),
+    ...baseConfig(true),
     devServer: {
-        host: '0.0.0.0',
-        port: 8080,
         historyApiFallback: true,
-        compress: true,
         disableHostCheck: true,
+        host: '0.0.0.0',
+        compress: true,
         cert: ssl.cert,
         key: ssl.key,
+        port: 8080,
         headers: {
             'Access-Control-Allow-Origin': '*',
             'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
@@ -32,19 +34,21 @@ export default {
         },
     },
     devtool: 'inline-source-map',
+    mode: 'development',
     plugins: [
+        new webpack.DefinePlugin({
+            __DEVELOPMENT__: true,
+            __STAGING__: false,
+            __PRODUCTION__: false
+        }),
         new HtmlWebpackPlugin({
             template: path.resolve(ROOT_PATH, 'src/index.dev.html')
         }),
         new webpack.LoaderOptionsPlugin({
             debug: true
         }),
-        new webpack.NamedModulesPlugin(),
+        new webpack.HotModuleReplacementPlugin(),
         new webpack.NoEmitOnErrorsPlugin(),
-        new webpack.DefinePlugin({
-            __DEV__: true,
-            __STAGING__: false,
-            __LIVE__: false,
-        })
+        new webpack.NamedModulesPlugin()
     ]
 };
