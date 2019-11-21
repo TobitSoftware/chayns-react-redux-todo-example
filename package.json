@@ -1,7 +1,7 @@
 {
-  "name": "chayns-react-redux-example",
+  "name": "chayns-react-redux-todo-example",
   "version": "1.0.0",
-  "description": "chayns® + react + redux example of a simple ToDo-List",
+  "description": "chayns® + react + redux example of a simple todo list",
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --hot --config ./webpack/dev.babel.js --mode development --https",
@@ -63,8 +63,7 @@
   "keywords": [
     "chayns",
     "react",
-    "redux",
-    "immutable"
+    "redux"
   ],
   "bugs": {
     "url": ""
