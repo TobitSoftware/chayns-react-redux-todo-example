@@ -23,8 +23,6 @@ class Todos extends PureComponent {
     render() {
         const { todos } = this.props;
 
-        console.debug('todos', todos);
-
         const items = todos.map((todo) => (
             // We use the TodoContainer that manages the state/dispatches for the TodoComponent.
             // We pass the id, so the container can get the correct data from the redux state.
