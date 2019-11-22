@@ -14,10 +14,11 @@ import App, { HotApp } from './components/App';
 // Create redux store
 const store = configureStore();
 
-// Get root element
+// Get tapp element
 const tappElement = document.querySelector('.tapp');
 
-// We render the given component into the root element
+// Render App component into tapp element
+// If mode is development the component will be used from hot export of App
 const render = () => {
     ReactDOM.render(
         <Provider store={store}>

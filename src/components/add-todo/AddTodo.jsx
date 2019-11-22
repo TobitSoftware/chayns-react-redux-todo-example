@@ -26,6 +26,8 @@ class AddTodo extends PureComponent {
         const { addTodo } = this.props;
         const { newTodo } = this.state;
 
+        // We call addTodo from our props and add an id to our data.
+        // Normally we use a real id instead of a random number.
         if (newTodo.text.length > 0) {
             addTodo({
                 ...newTodo,
@@ -34,6 +36,7 @@ class AddTodo extends PureComponent {
             });
         }
 
+        // We reset the state to our initial value
         this.setState({ newTodo: { text: '' } });
     };
 
