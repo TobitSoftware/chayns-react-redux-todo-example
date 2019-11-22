@@ -1,9 +1,12 @@
 import React, { PureComponent } from 'react';
-import { Map } from 'immutable';
 import PropTypes from 'prop-types';
-import Input from 'chayns-components/lib/react-chayns-input/component/Input';
+
+// chayns-components
 import Button from 'chayns-components/lib/react-chayns-button/component/Button';
-import './addTodo.scss';
+import Input from 'chayns-components/lib/react-chayns-input/component/Input';
+
+// Styles
+import './add-todo.scss';
 
 // We use PureComponent instead of Component because it handles the shouldComponentUpdate method for us.
 // If we want to define our own shouldComponentUpdate logic we have to use Component instead of PureComponent.
@@ -13,35 +16,25 @@ class AddTodo extends PureComponent {
 
         // Set initial state
         this.state = {
-            newTodo: Map({
-                todo: '',
-            })
+            newTodo: { text: '' },
         };
     }
 
-    handleInputChange = (value) => {
-        const { newTodo } = this.state;
-
-        this.setState({
-            newTodo: newTodo.set('todo', value)
-        });
-    };
+    handleInputChange = (value) => this.setState({ newTodo: { text: value } });
 
     handleAddTodo = () => {
         const { addTodo } = this.props;
         const { newTodo } = this.state;
 
-        if (newTodo.get('todo').length > 0) {
-            addTodo(
-                newTodo
-                    .set('id', Math.random())
-                    .set('creationTime', Date.now())
-            );
+        if (newTodo.text.length > 0) {
+            addTodo({
+                ...newTodo,
+                id: Math.random(),
+                creationTime: Date.now(),
+            });
         }
 
-        this.setState({
-            newTodo: newTodo.set('todo', '')
-        });
+        this.setState({ newTodo: { text: '' } });
     };
 
     render() {
@@ -50,18 +43,19 @@ class AddTodo extends PureComponent {
         return (
             <div className="add-todo">
                 <Input
-                    value={newTodo.get('todo')}
                     onChange={this.handleInputChange}
-                    placeholder="add todo"
                     onEnter={this.handleAddTodo}
+                    placeholder="Add todo"
+                    value={newTodo.text}
                 />
-                <Button
-                    className="add-todo__button"
-                    onClick={this.handleAddTodo}
-                    disabled={newTodo.get('todo').length <= 0}
-                >
-                    +
-                </Button>
+                <div className="add-todo__button-wrapper">
+                    <Button
+                        disabled={newTodo.text.length <= 0}
+                        onClick={this.handleAddTodo}
+                    >
+                        Add
+                    </Button>
+                </div>
             </div>
         );
     }

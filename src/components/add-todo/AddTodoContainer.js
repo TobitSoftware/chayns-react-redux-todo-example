@@ -1,14 +1,18 @@
 import { connect } from 'react-redux';
-import { handleAddTodo } from '../../actions/todos';
+
+// Actions
+import { addTodo } from '../../redux-modules/todos/actions';
+
+// Components
 import AddTodo from './AddTodo';
 
-const mapDispatchToProps = () => dispatch => ({
-    addTodo: todo => dispatch(handleAddTodo(todo))
-});
+const mapDispatchToProps = {
+    addTodo,
+};
 
 const AddTodoContainer = connect(
     null,
-    mapDispatchToProps
+    mapDispatchToProps,
 )(AddTodo);
 
 export default AddTodoContainer;

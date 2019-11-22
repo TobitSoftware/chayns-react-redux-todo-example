@@ -1,68 +1,38 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import immutable from 'immutable';
-import thunk from 'redux-thunk';
-import { createLogger } from 'redux-logger';
 import { Provider } from 'react-redux';
-import { applyMiddleware, createStore } from 'redux';
-import rootReducer from './reducers/root';
-import { getTodos } from './actions/todos';
-import App from './components/App';
+import ReactDOM from 'react-dom';
+import React from 'react';
 
-const reduxLogger = createLogger({
-    duration: true
-});
+// Constants
+import { IS_DEVELOPMENT } from './constants/environment';
 
-const middlewares = [thunk];
+// Utils
+import configureStore from './utils/store';
 
-if (__DEV__ || __STAGING__) {
-    const installDevTools = require('immutable-devtools');
-    installDevTools(immutable);
-    middlewares.push(reduxLogger);
-}
+// Components
+import App, { HotApp } from './components/App';
 
-// We create our redux store
-const store = createStore(
-    rootReducer,
-    applyMiddleware(...middlewares)
-);
+// Create redux store
+const store = configureStore();
 
-// We enable immutable dev tools for a better console experience
-if (__DEV__ || __STAGING__) {
-    const installDevTools = require('immutable-devtools');
-    installDevTools(immutable);
-}
-
-// We get the root element
-const rootEl = document.getElementById('app');
+// Get root element
+const tappElement = document.querySelector('.tapp');
 
 // We render the given component into the root element
-const render = (Component) => {
+const render = () => {
     ReactDOM.render(
         <Provider store={store}>
-            <Component/>
+            {IS_DEVELOPMENT ? (
+                <HotApp/>
+            ) : (
+                <App/>
+            )}
         </Provider>,
-        rootEl
+        tappElement,
     );
 };
 
-/**
- * The init function is used to be sure, that chayns® will be ready until render() is called
- * @return {Promise.<void>}
- */
-async function init() {
-    try {
-        // We wait until chayns® is ready
-        await chayns.ready;
-
-        // We dispatch getTodos to get the todos into our redux state
-        store.dispatch(getTodos());
-
-        // We render the App
-        render(App);
-    } catch (err) {
-        console.warn('no chayns environment found', err);
-    }
-}
-
-init();
+// Call render function after chayns is ready
+chayns.ready.then(render).catch((error) => {
+    // eslint-disable-next-line no-console
+    console.warn('No chayns environment found.', error);
+});

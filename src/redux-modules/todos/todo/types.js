@@ -1,0 +1,2 @@
+export const SET_TODO_NAME = 'SET_TODO_NAME';
+export const TOGGLE_TODO_CHECKED = 'TOGGLE_TODO_CHECKED';

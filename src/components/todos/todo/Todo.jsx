@@ -1,11 +1,21 @@
 import React, { PureComponent } from 'react';
-import { Map } from 'immutable';
 import PropTypes from 'prop-types';
+
+// chayns components
 import Checkbox from 'chayns-components/lib/react-chayns-checkbox/component/Checkbox';
-import Icon from 'chayns-components/lib/react-chayns-icon/component/Icon';
 import Tooltip from 'chayns-components/lib/react-chayns-tooltip/component/Tooltip';
+import Icon from 'chayns-components/lib/react-chayns-icon/component/Icon';
+
+// Icons
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
+
+// Utils
 import formatDateMonthYearHoursMinutes from '../../../utils/date-helper';
+
+// Shapes
+import { TODO_SHAPE } from '../../../constants/shapes';
+
+// Styles
 import './todo.scss';
 
 // We use PureComponent instead of Component because it handles the shouldComponentUpdate method for us.
@@ -14,13 +24,13 @@ class Todo extends PureComponent {
     handleToggleTodoChecked = () => {
         const { todo, toggleTodoChecked } = this.props;
 
-        toggleTodoChecked(todo.get('id'));
+        toggleTodoChecked(todo.id);
     };
 
     handleRemoveTodo = () => {
         const { todo, removeTodo } = this.props;
 
-        removeTodo(todo.get('id'));
+        removeTodo(todo.id);
     };
 
     render() {
@@ -29,16 +39,22 @@ class Todo extends PureComponent {
         return (
             <div className="todo">
                 <Checkbox
-                    checked={todo.get('checked')}
                     onChange={this.handleToggleTodoChecked}
+                    checked={todo.checked}
                 />
-                <Icon className="todo__delete-icon" icon={faTrash} onClick={this.handleRemoveTodo}/>
+                <Icon
+                    onClick={this.handleRemoveTodo}
+                    className="todo__delete-icon"
+                    icon={faTrash}
+                />
                 <Tooltip
+                    content={{ text: formatDateMonthYearHoursMinutes(todo.creationTime) }}
                     bindListeners
                     position={3}
-                    content={{ text: formatDateMonthYearHoursMinutes(todo.get('creationTime')) }}
                 >
-                    <div>{todo.get('todo')}</div>
+                    <div>
+                        {todo.text}
+                    </div>
                 </Tooltip>
             </div>
         );
@@ -46,7 +62,7 @@ class Todo extends PureComponent {
 }
 
 Todo.propTypes = {
-    todo: PropTypes.instanceOf(Map).isRequired,
+    todo: PropTypes.shape(TODO_SHAPE).isRequired,
     toggleTodoChecked: PropTypes.func.isRequired,
     removeTodo: PropTypes.func.isRequired,
 };
