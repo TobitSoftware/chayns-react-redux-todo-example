@@ -16,6 +16,10 @@
     "function-paren-newline": ["error", "multiline"],
     "comma-dangle": ["error", "always-multiline"],
     "arrow-parens": ["error", "always"],
+    "no-param-reassign": ["error", {
+      "props": true,
+      "ignorePropertyModificationsFor": ["draft"]
+    }],
     "linebreak-style": "off",
     "no-plusplus": "off",
     "max-len": "off",
@@ -34,6 +38,7 @@
     "import/no-extraneous-dependencies": "off",
     "import/no-cycle": "off",
     "react/static-property-placement": "off",
+    "react/jsx-indent-props": ["error", 4],
     "react/jsx-tag-spacing": ["error", {
       "beforeSelfClosing": "never",
       "beforeClosing": "never"
