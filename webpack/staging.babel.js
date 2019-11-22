@@ -15,19 +15,19 @@ export default {
     optimization: {
         minimizer: [new TerserPlugin({
             sourceMap: true,
-            parallel: true
-        })]
+            parallel: true,
+        })],
     },
     plugins: [
         new webpack.DefinePlugin({
             __DEVELOPMENT__: false,
             __STAGING__: true,
-            __PRODUCTION__: false
+            __PRODUCTION__: false,
         }),
         new HtmlWebpackPlugin({
-            template: path.resolve(ROOT_PATH, 'src/index.html')
+            template: path.resolve(ROOT_PATH, 'src/index.html'),
         }),
         new webpack.optimize.AggressiveMergingPlugin(),
-        new LodashModuleReplacementPlugin()
-    ]
+        new LodashModuleReplacementPlugin(),
+    ],
 };

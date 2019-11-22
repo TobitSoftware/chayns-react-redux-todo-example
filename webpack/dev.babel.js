@@ -30,7 +30,7 @@ export default {
         headers: {
             'Access-Control-Allow-Origin': '*',
             'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
-            'Access-Control-Allow-Headers': 'X-Requested-With, content-type, Authorization'
+            'Access-Control-Allow-Headers': 'X-Requested-With, content-type, Authorization',
         },
     },
     devtool: 'inline-source-map',
@@ -39,16 +39,16 @@ export default {
         new webpack.DefinePlugin({
             __DEVELOPMENT__: true,
             __STAGING__: false,
-            __PRODUCTION__: false
+            __PRODUCTION__: false,
         }),
         new HtmlWebpackPlugin({
-            template: path.resolve(ROOT_PATH, 'src/index.dev.html')
+            template: path.resolve(ROOT_PATH, 'src/index.dev.html'),
         }),
         new webpack.LoaderOptionsPlugin({
-            debug: true
+            debug: true,
         }),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoEmitOnErrorsPlugin(),
-        new webpack.NamedModulesPlugin()
+        new webpack.NamedModulesPlugin(),
     ]
 };
