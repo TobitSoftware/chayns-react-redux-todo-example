@@ -10,19 +10,19 @@ import { SET_TODO_NAME, TOGGLE_TODO_CHECKED } from './todo/types';
 const initialState = [];
 
 // eslint-disable-next-line consistent-return
-export default (state = initialState, action) => produce(state, (draft) => {
+export default (baseState = initialState, action) => produce(baseState, (draftState) => {
     switch (action.type) {
         case ADD_TODO:
-            draft.push(action.todo);
+            draftState.push(action.todo);
             break;
         case SET_TODOS:
             return action.todos;
         case REMOVE_TODO:
-            draft.filter((todo) => todo.id !== action.id);
+            draftState.filter((todo) => todo.id !== action.id);
             break;
         case SET_TODO_NAME:
         case TOGGLE_TODO_CHECKED:
-            draft.map((todo) => todoReducer(todo, action));
+            draftState.map((todo) => todoReducer(todo, action));
             break;
         default:
             break;

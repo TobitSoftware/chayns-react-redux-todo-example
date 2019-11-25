@@ -1,11 +1,11 @@
 // Types
 import { TOGGLE_TODO_CHECKED } from './types';
 
+// Api functions
+import { postTodosToLocalStorage } from '../../../api/todos/post';
+
 // Selectors
 import { getTodos } from '../selectors';
-
-// Api functions
-import { postTodosToLocalStorage } from '../../../api/todos';
 
 export const toggleTodoChecked = (id) => (dispatch, getState) => {
     dispatch({ type: TOGGLE_TODO_CHECKED, id });

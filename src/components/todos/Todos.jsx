@@ -14,10 +14,10 @@ import TodosHeadline from './todos-headline/TodosHeadline';
 // We use PureComponent instead of Component because it handles the shouldComponentUpdate method for us.
 // If we want to define our own shouldComponentUpdate logic we have to use Component instead of PureComponent.
 class Todos extends PureComponent {
-    constructor(props) {
-        super(props);
+    componentDidMount() {
+        const { loadTodos } = this.props;
 
-        props.loadTodos();
+        loadTodos();
     }
 
     render() {

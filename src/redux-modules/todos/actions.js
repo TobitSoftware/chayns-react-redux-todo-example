@@ -2,7 +2,8 @@
 import { ADD_TODO, REMOVE_TODO, SET_TODOS } from './types';
 
 // Api functions
-import { getTodosFromLocalStorage, postTodosToLocalStorage } from '../../api/todos';
+import { getTodosFromLocalStorage } from '../../api/todos/get';
+import { postTodosToLocalStorage } from '../../api/todos/post';
 
 // Selectors
 import { getTodos } from './selectors';
