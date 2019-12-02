@@ -6,6 +6,8 @@ chayns® React + Redux example
 This project is an example for how u can use chayns® + [React][5] + [Redux][4]. <br>
 It's a simple ToDo-List where u can add, check/uncheck and remove ToDos. The ToDos will be saved in the localstorage.
 
+> :exclamation: This is just an example project. Don't use it as a basis to build your new project. Use the [template][6] to do this and follow the instructions in the readme.
+
 Development
 -------------
 1. Install all project dependencies with  `npm i`
@@ -35,3 +37,4 @@ You can also build this project with sourceMaps for testing via `npm run build:s
  [3]: https://chayns.net
  [4]: https://redux.js.org/basics/usagewithreact
  [5]: https://reactjs.org/
+ [6]: https://github.com/TobitSoftware/chayns-react-redux-template
