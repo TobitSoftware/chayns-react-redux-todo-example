@@ -18,7 +18,7 @@ export default (baseState = initialState, action) => produce(baseState, (draftSt
         case SET_TODOS:
             return action.todos;
         case REMOVE_TODO:
-            draftState.filter((todo) => todo.id !== action.id);
+            draftState.splice(draftState.findIndex((todo) => todo.id === action.id), 1);
             break;
         case SET_TODO_NAME:
         case TOGGLE_TODO_CHECKED:
